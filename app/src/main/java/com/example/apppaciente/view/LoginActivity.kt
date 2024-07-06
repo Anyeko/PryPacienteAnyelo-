@@ -42,6 +42,7 @@ class LoginActivity : AppCompatActivity() {
                 editor.putString("foto", response.data.foto)
                 editor.putString("direccion", response.data.direccion)
                 editor.putString("telefono", response.data.telefono)
+                editor.putInt("notificacion", response.data.notificacion)
                 editor.apply()
 
                 // Navegar a HomeActivity

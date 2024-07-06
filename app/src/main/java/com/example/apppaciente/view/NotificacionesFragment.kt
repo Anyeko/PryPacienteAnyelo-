@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.CheckBox
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.apppaciente.R
@@ -31,6 +32,8 @@ class NotificacionesFragment : Fragment(), NotificacionesAdapter.NotificacionesA
 
     private var notificacionesList: List<NotificacionesResponse.Data> = emptyList()
 
+    private lateinit var check: CheckBox
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -45,10 +48,16 @@ class NotificacionesFragment : Fragment(), NotificacionesAdapter.NotificacionesA
 
         val sharedPreferences = requireActivity().getSharedPreferences("UserPrefs", Context.MODE_PRIVATE)
         val pacienteId = sharedPreferences.getInt("paciente_id", -1)
+        val notificacionUser = sharedPreferences.getInt("notificacion", -1)
+
+        check = view.findViewById(R.id.checkBoxNotificacion)
+
+        check.isChecked = if (notificacionUser == 1) true else false
 
         binding.checkBoxNotificacion.setOnCheckedChangeListener { _, isChecked ->
             val notificacionEstado = if (isChecked) 1 else 0
             actualizarEstadoNotificacion(pacienteId, notificacionEstado)
+
         }
 
         // Inicialmente, obtener notificaciones si el checkbox está marcado

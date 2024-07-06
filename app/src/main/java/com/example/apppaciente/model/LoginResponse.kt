@@ -23,5 +23,6 @@ data class UserData(
     val sexo: Int,
     val telefono: String,
     val tipo_documento_id: Int,
-    val token: String
+    val token: String,
+    val notificacion: Int
 )
